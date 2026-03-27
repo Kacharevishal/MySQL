@@ -1,0 +1,477 @@
+Enter password: ***********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.40 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| student            |
++--------------------+
+5 rows in set (0.08 sec)
+
+mysql> use employee;
+Database changed
+mysql> show tables;
+Empty set (0.01 sec)
+
+mysql> desc employee;
+ERROR 1146 (42S02): Table 'employee.employee' doesn't exist
+mysql> create table empData(empId INT PRIMARY KEY, name VARCHAR(50) NOT NULL, mobNo bigInt NOT NULL, adharNo bigInt NOT NULL,salary double NOT NULL,city VARCHAR(50));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc empData;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| empId   | int         | NO   | PRI | NULL    |       |
+| name    | varchar(50) | NO   |     | NULL    |       |
+| mobNo   | bigint      | NO   |     | NULL    |       |
+| adharNo | bigint      | NO   |     | NULL    |       |
+| salary  | double      | NO   |     | NULL    |       |
+| city    | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> insert into empData(empId,name,mobNo,adharNo,salary,city)Values(1,'Ram Singh',7894561235,584796512548,90456.80,'Panjab');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into empData(empId,name,mobNo,adharNo,salary,city)Values(2,'Shyam Singh',8894561235,684796512548,80456.80,'Kerala');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into empData(empId,name,mobNo,adharNo,salary,city)Values(3,'Radha',894561235,984796512548,95456.80,'Vrindawan');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into empData(empId,name,mobNo,adharNo,salary,city)Values(4,'Krishna',694561235,484796512548,70456.80,'Vrindawan'),(5,'Keshav',094561235,284796512548,60456.80,'Nashik'),(6,'Madhav',594561235,284796512548,65456.80,'Pune'),(7,'Sita Ji',904561235,454796512548,55456.80,'Kolhapur'),(8,'Rani',844561235,104796512548,50456.80,'Satara'),(9,'Bharat S',444561235,084796512548,44456.80,'Solapur'),(10,'Radika',704561235,128796512548,35456.80,'Sangli');
+Query OK, 7 rows affected (0.03 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.01 sec)
+
+mysql> ALTER table name empData UPDATE empInfo VAARCHAR(50);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'empData UPDATE empInfo VAARCHAR(50)' at line 1
+mysql> select max(salary) from empData;
++-------------+
+| max(salary) |
++-------------+
+|     95456.8 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(salary) from empdata;
++-------------+
+| min(salary) |
++-------------+
+|     35456.8 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from empData where city = 'vrindawan' OR salary >= 90;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData where salary >= 90;a
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+    ->
+    -> select * from empData where salary >= 90;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'a
+
+select * from empData where salary >= 90' at line 1
+mysql> select * from empData where salary >= 90;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData where city == panjab;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== panjab' at line 1
+mysql> select * from empData where city = panjab;;
+ERROR 1054 (42S22): Unknown column 'panjab' in 'where clause'
+ERROR:
+No query specified
+
+mysql> select * from empData where city = panjab;
+ERROR 1054 (42S22): Unknown column 'panjab' in 'where clause'
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData where city = kerala;
+ERROR 1054 (42S22): Unknown column 'kerala' in 'where clause'
+mysql> select * from empData where name = radha;
+ERROR 1054 (42S22): Unknown column 'radha' in 'where clause'
+mysql> select * from empData where salary > 50000;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
++-------+-------------+------------+--------------+---------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from empData where salary >= 50000 AND city = Vrindawan;
+ERROR 1054 (42S22): Unknown column 'Vrindawan' in 'where clause'
+mysql> select * from empData where salary >= 50000 AND city == Vrindawan;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== Vrindawan' at line 1
+mysql> select * from empData group by city where city = vrindawan AND salary > 50000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where city = vrindawan AND salary > 50000' at line 1
+mysql> select * from empData where salary >= 50000 AND city == Vrindawan;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== Vrindawan' at line 1
+mysql> select * from empData where salary >= 50000 OR city == Vrindawan;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== Vrindawan' at line 1
+mysql> select * from empData where salary >= 50000 OR city == 'Vrindawan';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '== 'Vrindawan'' at line 1
+mysql> select * from empData where salary >= 50000 OR city = 'Vrindawan';
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
++-------+-------------+------------+--------------+---------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from empData where salary >= 50000 AND city = 'Vrindawan';
++-------+---------+-----------+--------------+---------+-----------+
+| empId | name    | mobNo     | adharNo      | salary  | city      |
++-------+---------+-----------+--------------+---------+-----------+
+|     3 | Radha   | 894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna | 694561235 | 484796512548 | 70456.8 | Vrindawan |
++-------+---------+-----------+--------------+---------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from empData group by salary desc where city = 'Vrindawan' limit 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc where city = 'Vrindawan' limit 1' at line 1
+mysql> select * from empData group by salary desc where city = 'Vrindawan';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc where city = 'Vrindawan'' at line 1
+mysql> select * from empData group by salary desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select * from empData group by salary desc limit 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc limit 1' at line 1
+mysql> select * from empData group by salary desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select * from empData group by salary0;
+ERROR 1054 (42S22): Unknown column 'salary0' in 'group statement'
+mysql> select * from empData group by salary;
+ERROR 1055 (42000): Expression #1 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'employee.empData.empId' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> select * from empData order by salary;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData order by salary desc limit 2 offset 1;
++-------+-------------+------------+--------------+---------+--------+
+| empId | name        | mobNo      | adharNo      | salary  | city   |
++-------+-------------+------------+--------------+---------+--------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala |
++-------+-------------+------------+--------------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from empData order by salary desc limit 1 offset 1;
++-------+-----------+------------+--------------+---------+--------+
+| empId | name      | mobNo      | adharNo      | salary  | city   |
++-------+-----------+------------+--------------+---------+--------+
+|     1 | Ram Singh | 7894561235 | 584796512548 | 90456.8 | Panjab |
++-------+-----------+------------+--------------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from empData order by salary desc limit 1;
++-------+-------+-----------+--------------+---------+-----------+
+| empId | name  | mobNo     | adharNo      | salary  | city      |
++-------+-------+-----------+--------------+---------+-----------+
+|     3 | Radha | 894561235 | 984796512548 | 95456.8 | Vrindawan |
++-------+-------+-----------+--------------+---------+-----------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> select * from empData order by salary desc limit 1 where city = 'Vrindawan';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where city = 'Vrindawan'' at line 1
+mysql> select * from empData where city = 'Vrindawan' order by salary desc limit 1;
++-------+-------+-----------+--------------+---------+-----------+
+| empId | name  | mobNo     | adharNo      | salary  | city      |
++-------+-------+-----------+--------------+---------+-----------+
+|     3 | Radha | 894561235 | 984796512548 | 95456.8 | Vrindawan |
++-------+-------+-----------+--------------+---------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from empData where city = 'Vrindawan' order by salary desc limit 1 offset 1;
++-------+---------+-----------+--------------+---------+-----------+
+| empId | name    | mobNo     | adharNo      | salary  | city      |
++-------+---------+-----------+--------------+---------+-----------+
+|     4 | Krishna | 694561235 | 484796512548 | 70456.8 | Vrindawan |
++-------+---------+-----------+--------------+---------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from empData where city = 'Pune';
++-------+--------+-----------+--------------+---------+------+
+| empId | name   | mobNo     | adharNo      | salary  | city |
++-------+--------+-----------+--------------+---------+------+
+|     6 | Madhav | 594561235 | 284796512548 | 65456.8 | Pune |
++-------+--------+-----------+--------------+---------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from empData is not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'is not null' at line 1
+mysql> Alter table RENAME empData TO empInfo;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'RENAME empData TO empInfo' at line 1
+mysql> Alter table empData RENAME TO empInfo;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from empInfo;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mobNo      | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER table empInfo RENAME to empData;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> Alter Table empData MODIFY mob_No int;
+ERROR 1054 (42S22): Unknown column 'mob_No' in 'empdata'
+mysql> Alter Table empData MODIFY mobNo int;
+ERROR 1264 (22003): Out of range value for column 'mobNo' at row 1
+mysql> Alter Table empData RENAME mobNo to mob_No;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to mob_No' at line 1
+mysql> Alter Table empData RENAME column mobNo to mob_No;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mob_No     | adharNo      | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> Alter table empData Modify column adharNo to adhar_no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to adhar_no' at line 1
+mysql> Alter table empData rename column adharNo to adhar_no;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mob_No     | adhar_no     | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> alter table empData add time varchar(10);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+------+
+| empId | name        | mob_No     | adhar_no     | salary  | city      | time |
++-------+-------------+------------+--------------+---------+-----------+------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    | NULL |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    | NULL |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan | NULL |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan | NULL |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    | NULL |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      | NULL |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  | NULL |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    | NULL |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   | NULL |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    | NULL |
++-------+-------------+------------+--------------+---------+-----------+------+
+10 rows in set (0.00 sec)
+
+mysql> alter table empData drop time;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from empData;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mob_No     | adhar_no     | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData order by desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'desc' at line 1
+mysql> select * from empData order by empId desc;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mob_No     | adhar_no     | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|    10 | Radika      |  704561235 | 128796512548 | 35456.8 | Sangli    |
+|     9 | Bharat S    |  444561235 |  84796512548 | 44456.8 | Solapur   |
+|     8 | Rani        |  844561235 | 104796512548 | 50456.8 | Satara    |
+|     7 | Sita Ji     |  904561235 | 454796512548 | 55456.8 | Kolhapur  |
+|     6 | Madhav      |  594561235 | 284796512548 | 65456.8 | Pune      |
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
++-------+-------------+------------+--------------+---------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select * from empData order by empId desc limit 5;
++-------+----------+-----------+--------------+---------+----------+
+| empId | name     | mob_No    | adhar_no     | salary  | city     |
++-------+----------+-----------+--------------+---------+----------+
+|    10 | Radika   | 704561235 | 128796512548 | 35456.8 | Sangli   |
+|     9 | Bharat S | 444561235 |  84796512548 | 44456.8 | Solapur  |
+|     8 | Rani     | 844561235 | 104796512548 | 50456.8 | Satara   |
+|     7 | Sita Ji  | 904561235 | 454796512548 | 55456.8 | Kolhapur |
+|     6 | Madhav   | 594561235 | 284796512548 | 65456.8 | Pune     |
++-------+----------+-----------+--------------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from empData order by empId desc limit 5 offset 5;
++-------+-------------+------------+--------------+---------+-----------+
+| empId | name        | mob_No     | adhar_no     | salary  | city      |
++-------+-------------+------------+--------------+---------+-----------+
+|     5 | Keshav      |   94561235 | 284796512548 | 60456.8 | Nashik    |
+|     4 | Krishna     |  694561235 | 484796512548 | 70456.8 | Vrindawan |
+|     3 | Radha       |  894561235 | 984796512548 | 95456.8 | Vrindawan |
+|     2 | Shyam Singh | 8894561235 | 684796512548 | 80456.8 | Kerala    |
+|     1 | Ram Singh   | 7894561235 | 584796512548 | 90456.8 | Panjab    |
++-------+-------------+------------+--------------+---------+-----------+
+5 rows in set (0.00 sec)
